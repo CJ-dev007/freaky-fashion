@@ -1,0 +1,108 @@
+
+        /* -- PRODUKTKORTEN index.html -- */
+.product-grid h2  {
+  display: none;
+}
+
+.product-grid  {
+        margin: 0;
+      }
+
+.product-grid h2  {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.product-grid .items  {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.product-card  {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 0;
+}
+
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+}
+
+.product-card .product-details-toprow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  width: 100%;
+  padding-top: 0.5rem;
+  min-width: 0; 
+}
+
+.product-card .name {
+  white-space: nowrap;
+  flex: 1; 
+}
+
+.product-card .price {
+  white-space: nowrap;
+  margin-left: 10px;
+  flex-shrink: 0; 
+  display: block;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.product-card img  {
+  width: 100%;
+}
+
+.product-card .like-icon  {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+}
+
+.product-card .brand  {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.product-card .badge  {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: black; 
+  color: white;
+  border-radius: .4rem;
+  padding: 10px 16px;
+  font-size: 0.75rem;
+}
+
+@media screen and (min-width: 480px)  {
+        .product-grid .items {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media screen and (min-width: 480px)  {
+        html {
+          font-size: 1rem;
+        }
+      }
+
+@media screen and (min-width: 1024px)  {
+  .product-grid .items {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; 
+    padding: 2rem;
+  }
+}

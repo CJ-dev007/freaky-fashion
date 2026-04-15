@@ -11,10 +11,12 @@ router.get('/', function(req, res, next) {
 
   const products = select.all();
 
-  // /views/index.ejs
+ 
   res.render('index', {
     title: 'FreakyFashion',
-    products
+    heroTitle: "Lorem ipsum dolor", 
+    heroText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    products: products
   });
 });
 

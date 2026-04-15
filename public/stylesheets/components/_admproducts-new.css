@@ -1,0 +1,145 @@
+         /* -- admin/products/new */
+
+body  {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    height: 100vh;
+}
+
+.top-bar  {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+}
+
+.top-bar h1  {
+  margin: 0;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.container  {
+    display: flex; 
+    min-height: 100vh;
+}
+
+.sidebar  {
+    width: 180px;
+    background-color: #eee;
+    border-right: 1px solid #202020;
+    padding: 20px 0;
+}
+
+.sidebar ul  {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li  {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.content  {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.content h2  {
+    margin-bottom: 1.5rem;
+}
+
+.form-group  {
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+label  {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+input[type="number"],
+input[type="date"],
+textarea  {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#namn,
+#sku, 
+#pris  {
+    width: 200px;
+    height: 25px;
+}
+
+#publicering  {
+    width: 200px;
+    height: 25px;
+}
+
+#beskrivning  {
+    width: 350px;
+    height: 150px; 
+}    
+
+input::placeholder, 
+textarea::placeholder  {
+    color: #000;
+}
+
+.file-input  {
+    display: none; 
+}
+
+.custom-file-upload  {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    border: 1px solid black;
+    border-radius: .2rem;
+    font-size: 14px;
+    width: 5rem;
+
+}
+
+/* Kategorier (Checkboxar) */
+.form-group label  {
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: .5rem; 
+}
+
+.form-group p  {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.form-group input[type="checkbox"]  {
+    margin: 0;          
+    width: 14px;
+    height: 14px;
+}
+
+.button-Add  {
+    background-color: #e0e0e0;
+    border: 1px solid black;
+    padding: 8px 25px;
+    font-size: 1rem;
+    border-radius: .3rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button-Add:hover  {
+    background-color: #ccc;
+}

@@ -1,0 +1,106 @@
+            /* -- Slideshow-produkter -- */
+
+/* --- MOBIL --- */
+.related-products  {
+  display: none; 
+}
+
+/* --- FRÅN 480px OCH UPPÅT --- */
+@media (min-width: 480px) {
+  .related-products  {
+    display: block; 
+    padding: 2rem 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    text-align: center;
+  }
+
+  .related-products h2  {
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .slideshow-wrapper  {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .product-scroll  {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto; /* Gör den blädderbar om det finns fler än 3 */
+    scroll-behavior: smooth;
+    scrollbar-width: none; 
+    flex: 1;
+  }
+
+  .product-scroll::-webkit-scrollbar  {
+    display: none;
+  }
+
+  .product-card  {
+    flex: 0 0 calc((100% - 2rem) / 3); 
+    text-decoration: none;
+    color: black;
+    text-align: left;
+  }
+
+  .image-container  {
+    width: 100%;
+    margin-bottom: 0.8rem;
+  }
+
+  .image-container img  {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .main-info  {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    gap: 5px;               
+    margin-top: 8px;
+    font-size: 0.80rem;      
+    line-height: 1.2;
+    white-space: nowrap; 
+    overflow: hidden;    
+  }
+
+  .brand  {
+    font-size: 0.85rem;      
+    color: #777;            
+    margin-top: 2px;
+  }
+
+  .nav-button  {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+    padding: 0 5px;
+  }
+}
+
+@media (min-width: 1024px)  {
+  
+  .main-info  {
+    font-size: 1rem;       
+    margin-top: 12px;     
+  }
+
+  .brand  {
+    font-size: 0.9rem;     
+    margin-top: 4px;
+  }
+
+  .related-products h2  {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+}

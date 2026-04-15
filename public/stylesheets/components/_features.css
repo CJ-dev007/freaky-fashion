@@ -1,0 +1,46 @@
+          /* -- Features -- */
+
+.features  {
+  display: grid;
+  grid-template-columns: 1fr; 
+  gap: 20px;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.features-item  {
+  display: flex;
+  align-items: center; 
+  gap: 1rem;           
+  color: black;
+}
+
+.features-icon svg  {
+  width: 32px;
+  height: 32px;
+  fill: black;       
+  display: block;
+}
+
+.features-text  {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+@media (min-width: 480px)  {
+  .features {
+    grid-template-columns: 1fr 1fr; 
+    gap: 30px 80px;
+    padding: 40px 10%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px)  {
+  .features {
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px 40px;
+    max-width: 1200px;
+  }
+}

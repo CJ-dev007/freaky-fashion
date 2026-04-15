@@ -1,0 +1,44 @@
+
+                 /* -- SPOTS -- */
+.desktop-spots  {
+    display: none; 
+}
+
+@media (min-width: 1024px)  {
+    .desktop-spots  {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: calc(100% - 80px);
+        margin: 40px auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .spot  {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        color: black;
+        width: 100%;
+        overflow: hidden;
+    }
+
+      .spot img  {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+    .spot-text  {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      text-align: center;
+      width: 90%;
+      font-size: 1.5rem;
+    }
+  }
+    
