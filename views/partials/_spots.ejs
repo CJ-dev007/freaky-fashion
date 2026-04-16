@@ -1,0 +1,10 @@
+
+<div class="desktop-spots">
+  <% spots.forEach(spot => { %>
+    <a href="/products/<%= spot.id %>" class="spot">
+       <img src="<%= spot.image %>" alt="<%= spot.name %>">
+       <div class="spot-text"><%= spot.name %></div>
+    </a>
+  <% }) %>
+</div>
+
