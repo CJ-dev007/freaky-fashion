@@ -59,3 +59,47 @@
 
 </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.favorite-btn').forEach(button => {
+    button.addEventListener('click', async function(e) {
+      // 1. Stoppa länkarna
+      e.preventDefault();
+      e.stopPropagation();
+
+      const productId = this.dataset.id;
+      const icon = this.querySelector('i');
+
+      // 2. Toggla ikonen direkt (Frontend-förändring)
+      icon.classList.toggle('bi-heart');
+      icon.classList.toggle('bi-heart-fill');
+
+      // 3. Skicka till servern (Backend-förändring)
+      try {
+        const response = await fetch(`/favorites/toggle/${productId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+    
+        if (!response.ok) {
+          throw new Error('Kunde inte spara favorit');
+        }
+
+        const data = await response.json();
+        console.log("Session uppdaterad! Antal favoriter:", data.count);
+
+      } catch (error) {
+        console.error("Fel vid sparning:", error);
+        // Om servern dör, kan vi toggla tillbaka hjärtat som en säkerhetsåtgärd
+        icon.classList.toggle('bi-heart');
+        icon.classList.toggle('bi-heart-fill');
+      }
+    });
+  });
+ });
+</script>
+

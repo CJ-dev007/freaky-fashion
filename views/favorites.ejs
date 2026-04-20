@@ -1,1 +1,17 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="container">
+    <h1><%= title %></h1>
+     <% if (products.length > 0) { %>
+
+        <%- include('partials/_productGrid', { products: products }) %>
+ 
+    <% } else { %>
+        <p>Du har inte sparat några favoriter än.</p>
+        <a href="/" class="btn">Gå till shoppen</a>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
 

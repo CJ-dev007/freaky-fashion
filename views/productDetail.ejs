@@ -1,0 +1,24 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="container">
+    <article class="product-card product-detail"> <!-- Article håller ihop själva produkten -->
+        <div class="image-container">
+            <img src="/<%= product.image %>" alt="<%= product.name %>">
+            <button class="favorite-btn" data-id="<%= product.id %>">
+                <i class="bi <%= product.isFavorite ? 'bi-heart-fill' : 'bi-heart' %>"></i>
+            </button>
+        </div>
+
+        <div class="product-info">
+            <h2 class="name"><%= product.name %></h2>
+            <div class="brand"><%= product.brand %></div>
+            <p class="description">Den perfekta mixen av komfort och attityd. Denna T-shirt är skuren i premium-bomull som bara blir mjukare för varje tvätt. Matcha med dina favoritjeans för en look som aldrig går ur tiden.</p>
+            <span class="price"><%= product.price %> kr</span>
+            <button class="add-to-basket">Lägg i varukorg</button>
+        </div>
+    </article>
+
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main>
+    <h1>Resultat för "<%= searchTerm %>"</h1>
+
+    <% if (products.length > 0) { %>
+        <%- include('partials/_productGrid', { products: products }) %>
+    <% } else { %> 
+        <p>Tyvärr, vi hittade inga produkter som matchade din sökning.</p>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
