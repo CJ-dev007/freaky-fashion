@@ -1,0 +1,39 @@
+<%- include('partials/head') %> 
+<%- include('partials/header') %>
+
+<main class="container">
+    <h1 class="category-title"><%= title %></h1> 
+        
+    <section class="product-grid">
+        <h2>Kläder</h2>
+            <div class="items">
+                <% products.forEach(product => { %>
+                    <div class="product-card">
+                        <a href="/products/<%= product.slug %>">
+                            <div class="image-container">
+                                <% if (product.isNew) { %>
+                                    <span class="badge">Nyhet</span>
+                                <% } %>
+                            <img src="/<%= product.image %>" alt="<%= product.name %>">
+                        
+                        <!-- Logik för hjärtat (fyllt eller tomt) -->
+                        <button class="favorite-btn" data-id="<%= product.id %>">
+                            <i class="bi <%= product.isFavorite ? 'bi-heart-fill' : 'bi-heart' %>"></i>
+                        </button>
+                    </div>
+                    
+                            <div class="product-details-toprow">
+                                <div class="name"><%= product.name %></div>
+                                <div class="price"><%= product.price %> SEK</div>
+                            </div>
+                            <div class="brand"><%= product.brand %></div>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+</main>
+
+<%- include('partials/_features.ejs') %>
+<%- include('partials/footer') %>
+

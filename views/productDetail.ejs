@@ -13,12 +13,100 @@
         <div class="product-info">
             <h2 class="name"><%= product.name %></h2>
             <div class="brand"><%= product.brand %></div>
-            <p class="description">Den perfekta mixen av komfort och attityd. Denna T-shirt är skuren i premium-bomull som bara blir mjukare för varje tvätt. Matcha med dina favoritjeans för en look som aldrig går ur tiden.</p>
+            <p class="description">Den perfekta mixen av komfort och attityd. Detta sköna plagg är tillverkat av premium-bomull som bara blir mjukare för varje tvätt. Matcha med dina favoritjeans för en look som aldrig går ur tiden.</p>
             <span class="price"><%= product.price %> kr</span>
-            <button class="add-to-basket">Lägg i varukorg</button>
+            <button class="add-to-basket" data-id="<%= product.id %>">Lägg i varukorg</button>
         </div>
     </article>
 
+    <section class="related-products">
+        <h2 class="section-title">Liknande produkter</h2>
+
+        <div class="slideshow-wrapper">
+            <button class="nav-button prev" id="prevButton" aria-label="Bakåt">❮</button>
+            
+            <div class="product-scroll" id="productScroll">
+                <%# Här loopar vi igenom 'relatedProducts' som du skickar från din route %>
+                <% relatedProducts.forEach(item => { %>
+                    <article class="product-card">
+                        <a href="/products/<%= item.slug %>">
+                            <div class="image-container">
+                                <img src="/<%= item.image %>" alt="<%= item.name %>">
+                            </div>
+                            <div class="product-details">
+                                <div class="main-info">
+                                    <span class="name"><%= item.name %></span>
+                                    <span class="price"><%= item.price %> kr</span>
+                                </div>
+                                <footer class="brand"><%= item.brand %></footer>
+                            </div>
+                        </a>
+                    </article>
+                <% }); %>
+            </div>
+
+            <button class="nav-button next" id="nextButton" aria-label="Framåt">❯</button>
+        </div>
+    </section>
 </main>
+
+<script>
+    (function() {
+        // --- 1. SLIDESHOW LOGIK ---
+        const scrollContainer = document.getElementById('productScroll');
+        const prevBtn = document.getElementById('prevButton');
+        const nextBtn = document.getElementById('nextButton');
+
+        // Vi kör bara slideshow-koden om elementen faktiskt finns på sidan
+        if (scrollContainer && prevBtn && nextBtn) {
+            const getScrollStep = () => {
+                const firstCard = scrollContainer.querySelector('.product-card');
+                return firstCard ? firstCard.offsetWidth + 20 : 300;
+            };
+
+            nextBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+            });
+
+            prevBtn.addEventListener('click', () => {
+                scrollContainer.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+            });
+
+            scrollContainer.addEventListener('scroll', () => {
+                const atStart = scrollContainer.scrollLeft <= 5;
+                const atEnd = scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 5;
+                
+                prevBtn.style.opacity = atStart ? '0.3' : '1';
+                prevBtn.style.pointerEvents = atStart ? 'none' : 'auto';
+                
+                nextBtn.style.opacity = atEnd ? '0.3' : '1';
+                nextBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
+            });
+        }
+
+        // --- 2. VARUKORG LOGIK ---
+        const addToBasketBtn = document.querySelector('.add-to-basket');
+
+        if (addToBasketBtn) {
+            addToBasketBtn.addEventListener('click', async () => {
+                const productId = addToBasketBtn.getAttribute('data-id');
+
+                try {
+                    const response = await fetch('/basket/add', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ productId: productId })
+                    });
+
+                    if (response.ok) {
+                        alert('Varan har lagts i varukorgen!');
+                    }
+                } catch (err) {
+                    console.error('Kunde inte lägga till i varukorg', err);
+                }
+            });
+        }    
+    })(); 
+</script>
 
 <%- include('partials/footer') %>

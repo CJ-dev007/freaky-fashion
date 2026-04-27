@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Administration</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Sidomeny -->
+         <nav class="sidebar">
+            <ul>
+                <li class="<%= activePage === 'products' ? 'selected' : '' %>">
+                    <a href="/admin/products">Produkter</a></li>
+                <li class="<%= activePage === 'categories' ? 'selected' : '' %>">
+                    <a href="/admin/categories">Kategorier</a></li>
+            </ul>
+         </nav>
+
+         <main class="admin-panel category-page">
+            <h2>Ny kategori</h2>
+
+            <!-- enctype krävs för att kunna ladda upp filer (bilder) -->
+            <form action="/admin/categories/new" method="POST" enctype="multipart/form-data" class="category-form">
+                
+                <div class="form-group">
+                    <label for="name">Namn</label>
+                    <input type="text" id="name" name="name" placeholder="Ange namn" required maxlength="25">
+                    <small>Obligatoriskt, max 25 tecken.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Bild</label>
+                    <label for="image-upload" class="custom-file-upload">
+                    Välj bild
+                    </label>
+                    <input id="image-upload" type="file" name="image" accept="image/*">
+                </div>
+
+                  <!-- Denna fyller ut tomrummet -->
+                <div class="spacer"></div>
+
+                <button type="submit" class="btn-add">Lägg till</button>
+            </form>     
+         </main>
+    </div>
+</body>
+</html>

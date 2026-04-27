@@ -1,17 +1,20 @@
 <%- include('partials/head') %>
 <%- include('partials/header') %>
 
-<main class="container">
+<main class="container empty-favorites">
     <h1><%= title %></h1>
-     <% if (products.length > 0) { %>
-
+    
+    <% if (products.length > 0) { %>
         <%- include('partials/_productGrid', { products: products }) %>
- 
     <% } else { %>
-        <p>Du har inte sparat några favoriter än.</p>
-        <a href="/" class="btn">Gå till shoppen</a>
+        <div class="empty-message">
+            <p>Du har inte sparat några favoriter än.</p>
+            <a href="/" class="btn">Gå till shoppen</a>
+        </div>
     <% } %>
 </main>
 
+
+<%- include('partials/_features.ejs') %>
 <%- include('partials/footer') %>
 

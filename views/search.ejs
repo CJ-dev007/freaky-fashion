@@ -2,13 +2,17 @@
 <%- include('partials/header') %>
 
 <main>
-    <h1>Resultat för "<%= searchTerm %>"</h1>
-
-    <% if (products.length > 0) { %>
+    <% if (products.length > 0) { %>      
+        <h1>Hittade <%= products.length %> produkter</h1>   
         <%- include('partials/_productGrid', { products: products }) %>
     <% } else { %> 
-        <p>Tyvärr, vi hittade inga produkter som matchade din sökning.</p>
+        <div class="no-results-container">
+            <h1>Hittade 0 produkter</h1>
+            <p>Tyvärr, vi hittade inga produkter som matchade din sökning.</p>
+            <a href="/" class="btn">Gå till shoppen</a>
+        </div>
     <% } %>
 </main>
 
+<%- include('partials/_features.ejs') %>
 <%- include('partials/footer') %>

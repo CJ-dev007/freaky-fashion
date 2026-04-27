@@ -1,0 +1,97 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="checkout-container">
+    <h1>Varukorgen</h1>
+
+    <% if (basketProducts && basketProducts.length > 0) { %>
+    <div class="basket-items">       
+        <div class="item basket-header">
+            <div>Produkt</div>
+            <div>Pris</div>
+            <div>Totalt</div>
+            <div>Antal</div>
+        </div>
+
+        <% basketProducts.forEach(item => { %>
+        <div class="item">
+            <div class="item-info">
+                <span class="product-name"><%= item.name %></span>
+               
+            </div>
+            <div class="price"><%= item.price %> kr</div>
+            <div class="total"><%= item.rowTotal %> kr</div>
+            <div class="quantity-actions">
+                <span class="mobile-unit-price"><%= item.price %> kr</span>
+                <select name="quantity" class="qty-select" data-id="<%= item.id %>">
+                    <% for(let i=1; i<=10; i++) { %>
+                        <option value="<%= i %>" <%= item.quantity == i ? 'selected' : '' %>><%= i %></option>
+                    <% } %>
+                </select>
+                <button class="remove-btn" data-id="<%= item.id %>" aria-label="Ta bort">
+                    <i class="bi bi-trash"></i> 
+                </button>
+            </div>
+        </div>
+    <% }); %>
+</div>
+   
+        <div class="basket-summary">
+            <a href="/checkout/">
+                <button class="buy-button">Till kassan</button>
+            </a>
+        </div>
+    <% } else { %>
+        <!-- Detta visas när varukorgen är tom -->
+        <div class="empty-basket-message">
+            <p>Din varukorg är tom.</p>
+            <a href="/" class="btn">Gå till shoppen</a>
+        </div>
+    <% } %>
+</main>
+
+<script>
+    (function() {
+        // --- 1. SOPTUNNA (TA BORT VARA) ---
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const id = btn.getAttribute('data-id');
+                
+                try {
+                    const response = await fetch(`/basket/remove/${id}`, { method: 'POST' });
+                    if (response.ok) {
+                        window.location.reload(); // Laddar om sidan för att visa ny korg
+                    }
+                } catch (err) {
+                    console.error('Kunde inte ta bort varan', err);
+                }
+            });
+        });
+
+        // --- 2. RULL-LISTA (ÄNDRA ANTAL) ---
+        document.querySelectorAll('.qty-select').forEach(select => {
+            select.addEventListener('change', async () => {
+                const id = select.getAttribute('data-id');
+                const newQty = select.value;
+
+                try {
+                    // Vi skickar det nya antalet till en ny route
+                    const response = await fetch('/basket/update-qty', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: id, qty: newQty })
+                    });
+                    
+                    if (response.ok) {
+                        window.location.reload();
+                    }
+                } catch (err) {
+                    console.error('Kunde inte uppdatera antal', err);
+                }
+            });
+        });
+    })();
+</script>
+
+<%- include('partials/_features.ejs') %>
+<%- include('partials/footer') %>

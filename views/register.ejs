@@ -1,0 +1,23 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="auth-container">
+  <h1>Registrera konto</h1>  
+
+    <form action="/register" method="POST" class="register-form">
+        <div class="form-group">
+            <label for="email">E-post</label>
+            <input type="email" id="email" name="email">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Lösenord</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <button type="submit" class="register-btn">Registrera</button>
+    </form>
+</main>
+
+<%- include('partials/_features.ejs') %>
+<%- include('partials/footer') %>

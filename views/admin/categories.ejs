@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+  <header class="top-bar">
+        <h1>Administration</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Sidomeny -->
+         <nav class="sidebar">
+            <ul>
+                <li class="<%= activePage === 'products' ? 'selected' : '' %>">
+                    <a href="/admin/products">Produkter</a>
+                </li>
+                <li class="<%= activePage === 'categories' ? 'selected' : '' %>">
+                    <a href="/admin/categories">Kategorier</a>
+                </li>
+            </ul>
+         </nav>
+
+        <main class="admin-panel category-page">
+            <header class="panel-header">
+                <h2 class="panel-title">Kategorier</h2>
+                <a href="/admin/categories/new" class="btn-add">Ny kategori</a>
+            </header>
+
+            <div class="product-table">
+                <div class="table-header category-grid">
+                    <div class="column-name">Namn</div>                
+                    <div class="column-actions"></div> 
+                </div>
+
+                <!-- Loopa igenom produkter från databasen -->
+                <% categories.forEach(category => { %>
+                <div class="table-row category-grid">
+                    <div><%= category.name %></div>           
+                    <div class="action-icons">                                          
+                        <!-- Form för att radera (behövs för att skicka POST) -->
+                        <form action="/admin/categories/delete/<%= category.id %>" method="POST" onsubmit="return confirm('Är du säker på att du vill radera <%= category.name %>?')">
+                            <button type="submit" class="btn-icon delete-icon">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <% }); %>
+
+                <% if (categories.length === 0) { %>
+                    <div class="table-row">
+                        <div class="table-empty">Inga kategorier hittades.</div>
+                    </div>
+                <% } %>
+            </div>   
+        </main>
+    </div>  
+</body>
+</html>
