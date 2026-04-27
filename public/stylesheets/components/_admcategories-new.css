@@ -1,0 +1,22 @@
+.admin-panel.category-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+}
+
+.admin-panel form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.spacer {
+    flex-grow: 1; 
+}
+
+.btn-add {
+    margin-top: auto;
+    margin-bottom: 40px;
+    align-self: flex-start; 
+    padding: 10px 20px;
+}

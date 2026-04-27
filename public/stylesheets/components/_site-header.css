@@ -68,6 +68,27 @@
   color: rgb(39, 189, 194);
 }
 
+.no-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px; /* Ger luft så det ser ut som på bilden */
+}
+
+.no-results-container p {
+    font-family: 'Inter';
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.no-results-container h1 {
+  margin-top: 0;
+}
+
 @media (min-width: 480px)  {
   .site-header  {
     display: flex;

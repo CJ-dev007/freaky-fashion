@@ -1,8 +1,12 @@
 @import "base.css";
 @import "components/_site-header.css";
+@import "components/_basket.css";
+@import "components/_register.css";
 @import "components/_hero.css";
 @import "components/_spots.css";
 @import "components/_productGrid.css";
 @import "components/_product-details.css";
+@import "components/_slide-show.css";
+@import "components/_favorites.css";
 @import "components/_features.css";
 @import "components/_site-footer.css";
