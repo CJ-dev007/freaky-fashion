@@ -63,7 +63,11 @@
    border: 2px solid black;
    font-weight: 500;
    font-size: medium;
-   background-color: #ccc;
+   background-color: #dee7de;
+}
+
+.add-to-basket:hover {
+    background-color: #b3cbb3; /* Lite mörkare vid hover */
 }
 
 @media (min-width: 480px) {
@@ -150,7 +154,7 @@
     width: auto;         
     min-width: 180px;    
     padding: 12px 30px;
-    background-color: #ccc;;
+    background-color: #dee7de;
     border: 2px solid #000;
     font-weight: 500;
     align-self: flex-start; 

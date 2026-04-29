@@ -28,10 +28,15 @@
 }
 
 .register-btn {
-    background: rgb(175, 223, 250);
+    background: #dee7de;
     border: 1px solid #000000;
-    padding: 4px 25px;
+    padding: 6px 25px;
     border-radius: 4px; 
     cursor: pointer;
     margin-top: 10px;
+    font-weight: bold;
+}
+
+.register-btn:hover {
+    background-color: #b3cbb3; /* Lite mörkare vid hover */
 }

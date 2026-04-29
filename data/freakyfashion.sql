@@ -1,7 +1,12 @@
 CREATE TABLE products (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
-  price INTEGER NOT NULL CHECK (price >= 0)
+  slug TEXT NOT NULL,
+  price INTEGER NOT NULL CHECK (price >= 0),
+  brand TEXT, 
+  image TEXT,
+  isNew INTEGER DEFAULT 0,
+  isPopular INTEGER DEFAULT 0
 );
 
 
