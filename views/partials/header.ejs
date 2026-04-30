@@ -20,9 +20,12 @@
   <nav>
     <ul class="main-menu">
       <li><a href="/news">Nyheter</a></li>
-      <li><a href="/categories/klader">Kläder</a></li>
-      <li><a href="/funny/accessories">Accessoarer</a></li>
-      <li><a href="/funny/shoes">Skor</a></li>
+
+    <% menuCategories.forEach(cat => { %>
+      <li>
+        <a href="/categories/<%= cat.id %>"><%= cat.name %></a>
+      </li>
+    <% }); %>
     </ul>
   </nav>
 </header>

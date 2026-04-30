@@ -4,7 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const session = require('express-session'); 
+const session = require('express-session');
+const db = require('./data/db');  
 
 const indexRouter = require('./routes/index');
 const productsRouter = require('./routes/products');
@@ -27,7 +28,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -37,6 +38,19 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false } // Sätt till false eftersom du kör lokalt (inte https)
 }));
+
+// Middleware som hämtar kategorier till menyn på VARJE sida
+app.use((req, res, next) => {
+    try {
+        const menuCategories = db.prepare("SELECT * FROM categories").all();
+        // res.locals gör att variabeln finns tillgänglig i ALLA .ejs-filer automatiskt
+        res.locals.menuCategories = menuCategories;
+    } catch (err) {
+        console.error("Kunde inte ladda menyn:", err);
+        res.locals.menuCategories = []; // Skicka tom lista om det skiter sig
+    }
+    next();
+});
 
 app.use('/admin/products', adminProductsRouter);
 app.use('/admin/categories', adminCategoriesRouter);
