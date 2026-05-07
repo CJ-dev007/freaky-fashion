@@ -1,5 +1,8 @@
 data/freakyfashion.db
 
+public/images/categories/*
+public/images/products/*
+
 # Logs
 logs
 *.log
