@@ -5,7 +5,14 @@
             <div class="product-card">
                 <a href="/products/<%= product.slug %>">
                     <div class="image-container">
-                        <% if (product.isNew) { %>
+                        <% 
+                            // 1. Räkna ut skillnaden i dagar mellan nu och när produkten skapades
+                            const today = new Date();
+                            const createdDate = new Date(product.createdAt);
+                            const diffInDays = (today - createdDate) / (1000 * 60 * 60 * 24);
+                        %>
+
+                        <% if (product.createdAt && diffInDays < 7) { %>
                             <span class="badge">Nyhet</span>
                         <% } %>
                         <img src="/<%= product.image %>" alt="<%= product.name %>">

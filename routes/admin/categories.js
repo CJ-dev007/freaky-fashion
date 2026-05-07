@@ -53,4 +53,22 @@ router.post('/new', upload.single('image'), (req, res) => {
     }
 });
 
+// RADERA KATEGORI
+router.post('/delete/:id', (req, res) => {
+    try {
+        const id = req.params.id;
+        
+        // Kör SQL för att ta bort kategorin med rätt ID
+        const sql = "DELETE FROM categories WHERE id = ?";
+        db.prepare(sql).run(id);
+
+        // Skicka tillbaka användaren till listan så de ser att den är borta
+        res.redirect('/admin/categories');
+    } catch (err) {
+        console.error("Fel vid radering:", err);
+        res.status(500).send("Kunde inte radera kategorin");
+    }
+});
+
+
 module.exports = router;

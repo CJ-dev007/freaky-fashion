@@ -63,13 +63,15 @@ router.post('/new', upload.single('image'), (req, res) => {
         const slug = name.toLowerCase().trim().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
 
         const imageName = req.file ? 'images/products/' + req.file.filename : 'images/products/placeholder.png';
+         // 1. Skapa datumet
+        const createdAt = new Date().toISOString();
 
         const sql = `
-            INSERT INTO products (name, slug, sku, price, categoryId, brand, image, isDeleted, isPopular) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0)
+            INSERT INTO products (name, slug, sku, price, categoryId, brand, image, isDeleted, isPopular, createdAt) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, ?)
         `;
 
-        db.prepare(sql).run(name, slug, sku, price, categoryId, brand, imageName);
+        db.prepare(sql).run(name, slug, sku, price, categoryId, brand, imageName, createdAt);
         
         // Efter att produkten sparats, skicka tillbaka till listan
         res.redirect('/admin/products');

@@ -3,7 +3,7 @@
 
 <main>
     <% if (products.length > 0) { %>      
-        <h1>Hittade <%= products.length %> produkter</h1>   
+        <h1> Hittade <%= products.length %> <%= products.length === 1 ? 'produkt' : 'produkter' %></h1>   
         <%- include('partials/_productGrid', { products: products }) %>
     <% } else { %> 
         <div class="no-results-container">

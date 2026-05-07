@@ -23,7 +23,15 @@
 
     <% menuCategories.forEach(cat => { %>
       <li>
-        <a href="/categories/<%= cat.id %>"><%= cat.name %></a>
+        <% if (cat.name.toLowerCase() === 'accessoarer') { %>
+          <a href="/funny/accessories"><%= cat.name %></a>
+        <% } else if (cat.name.toLowerCase() === 'skor') { %>
+          <a href="/funny/shoes"><%= cat.name %></a>
+        <% } else if (cat.name.toLowerCase() === 'kläder') { %>
+          <a href="/categories/klader"><%= cat.name %></a>
+        <% } else { %>           
+          <a href="/categories/<%= cat.id %>"><%= cat.name %></a>
+        <% } %>
       </li>
     <% }); %>
     </ul>

@@ -80,7 +80,7 @@ input[type="file"] {
 }
 
 .admin-panel input[name="brand"], 
-.admin-panel select[name="category"],
+.admin-panel select[name="categoryId"],
 .admin-panel textarea[name="description"] {
     max-width: 350px;
 }

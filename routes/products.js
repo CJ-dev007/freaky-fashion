@@ -1,24 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const popularProducts = require('../data/products'); 
 
 // Importera db-objektet - vi behöver detta för att kommunicera med databasen
 const db = require('../data/db');
 
-// RUTT FÖR PRODUKTDETALJER
 router.get('/:slug', (req, res) => {
-    // 1. Hämta id från URL:en och gör om till ett nummer
     const productSlug = req.params.slug;
-    const product = popularProducts.find(p => p.slug === productSlug);
+
+    // 1. Hämta produkten från databasen med hjälp av slug
+    const product = db.prepare("SELECT * FROM products WHERE slug = ? AND isDeleted != 1").get(productSlug);
  
     if (product) {
-        // Kontrollera om denna specifika produkt är en favorit i sessionen
+        // 2. Kontrollera favoriter
         const userFavorites = req.session.favorites || [];
         product.isFavorite = userFavorites.includes(product.id.toString());
 
-        const relatedProducts = popularProducts
-            .filter(p => p.slug !== productSlug)
-            .slice(0, 6);
+        // 3. Hämta relaterade produkter från databasen (t.ex. 6 slumpmässiga eller de senaste)
+        // Vi exkluderar den nuvarande produkten så den inte dyker upp som relaterad till sig själv
+        const relatedProducts = db.prepare(`
+            SELECT * FROM products 
+            WHERE slug != ? AND isDeleted != 1 
+            LIMIT 6
+        `).all(productSlug);
         
         res.render('productDetail', { 
             title: product.name, 

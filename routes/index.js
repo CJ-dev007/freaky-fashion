@@ -86,7 +86,7 @@ router.get('/', function(req, res, next) {
 
   const userFavorites = req.session.favorites || [];
 
-  const onlyPopularFromDb = db.prepare("SELECT * FROM products WHERE isPopular =1").all();
+  const onlyPopularFromDb = db.prepare("SELECT * FROM products WHERE isPopular =1 AND isDeleted = 0").all();
 
   const productsWithFavorites = onlyPopularFromDb.map(product => {
       return {
@@ -118,8 +118,6 @@ router.get('/checkout', (req, res) => {
         </div>
     `);        
 })
-
-
 
 
 module.exports = router;

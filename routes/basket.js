@@ -1,49 +1,52 @@
 const express = require('express');
 const router = express.Router();
-const popularProducts = require('../data/products');
 
 // Importera db-objektet - vi behöver detta för att kommunicera med databasen
 const db = require('../data/db');
 
 router.get('/', (req, res) => {
     const basketIds = req.session.basket || [];
-    const counts = {};
     
-    // 1. Räkna förekomster av varje ID
+    if (basketIds.length === 0) {
+        return res.render('basket', { 
+            title: 'Varukorgen',
+            basketProducts: [],
+            totalSum: 0 
+        });
+    }
+
+    const counts = {};
     basketIds.forEach(id => {
         counts[id] = (counts[id] || 0) + 1;
     });
 
     const uniqueIds = Object.keys(counts);
-    let totalSum = 0; // Nollställ summan inför varje rendering
+    let totalSum = 0;
     const basketProducts = [];
 
-    uniqueIds.forEach(id => {
-        // Hitta produkten i din lista (popularProducts)
-        const product = popularProducts.find(p => p.id.toString() === id.toString());
-        
-        if (product) {
-            const quantity = counts[id];
-            const rowTotal = product.price * quantity; // Pris för just denna rad
-            
-            // 2. ADDERA till den totala summan för hela varukorgen
-            totalSum += rowTotal; 
+    // Hämta alla unika produkter i varukorgen från databasen på en gång
+    const placeholders = uniqueIds.map(() => '?').join(',');
+    const productsFromDb = db.prepare(`SELECT * FROM products WHERE id IN (${placeholders})`).all(...uniqueIds);
 
-            basketProducts.push({
-                ...product,
-                quantity: quantity,
-                rowTotal: rowTotal
-            });
-        }
+    productsFromDb.forEach(product => {
+        const quantity = counts[product.id.toString()];
+        const rowTotal = product.price * quantity;
+        
+        totalSum += rowTotal; 
+
+        basketProducts.push({
+            ...product,
+            quantity: quantity,
+            rowTotal: rowTotal
+        });
     });
 
     res.render('basket', { 
         title: 'Varukorgen',
         basketProducts: basketProducts,
-        totalSum: totalSum // Skicka med den ackumulerade summan
+        totalSum: totalSum
     });
 });
-
 
 
 router.post('/add', (req, res) => {
