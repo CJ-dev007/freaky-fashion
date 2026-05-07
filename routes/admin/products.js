@@ -4,9 +4,9 @@ const db = require('../../data/db');
 const { isAdmin } = require('../../middleware/auth');
 
 const multer = require('multer');
-const path = require('path'); // Behövs för att hantera filändelser
+const path = require('path'); 
 
-// 1. Konfigurera hur och var filerna ska sparas
+// Konfigurera hur och var filerna ska sparas
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/images/products/');
@@ -18,10 +18,9 @@ const storage = multer.diskStorage({
     }
 });
 
-// 2. Skapa upload-objektet med den nya konfigurationen
+// Skapa upload-objektet med den nya konfigurationen
 const upload = multer({ storage: storage });
 
-// 1. LISTA ALLA PRODUKTER (Admin-vyn)
 router.get('/', (req, res) => {
     try {
         const allProducts = db.prepare("SELECT * FROM products WHERE isDeleted = 0").all();
@@ -37,7 +36,6 @@ router.get('/', (req, res) => {
     }
 });
 
-// 2. VISA FORMULÄR FÖR NY PRODUKT
 router.get('/new', (req, res) => {
     try {
         // Vi hämtar kategorier för att fylla drop-down menyn
@@ -54,16 +52,15 @@ router.get('/new', (req, res) => {
     }
 });
 
-// 3. SPARA NY PRODUKT (POST)
 router.post('/new', upload.single('image'), (req, res) => {
     try {
-        // Hämta data från formuläret (se till att namnen matchar 'name' i din HTML)
+        // Hämta data från formuläret 
         const { name, sku, price, categoryId, brand, description } = req.body;
 
         const slug = name.toLowerCase().trim().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
 
         const imageName = req.file ? 'images/products/' + req.file.filename : 'images/products/placeholder.png';
-         // 1. Skapa datumet
+         // Skapa datumet
         const createdAt = new Date().toISOString();
 
         const sql = `
@@ -72,8 +69,7 @@ router.post('/new', upload.single('image'), (req, res) => {
         `;
 
         db.prepare(sql).run(name, slug, sku, price, categoryId, brand, imageName, createdAt);
-        
-        // Efter att produkten sparats, skicka tillbaka till listan
+     
         res.redirect('/admin/products');
     } catch (err) {
         console.error("Kunde inte spara produkten:", err);
@@ -81,7 +77,7 @@ router.post('/new', upload.single('image'), (req, res) => {
     }
 });
 
-// 4. RADERA PRODUKT (SOFT DELETE)
+// RADERA PRODUKT (SOFT DELETE)
 router.post('/delete/:id', (req, res) => {
     const id = req.params.id;
     db.prepare("UPDATE products SET isDeleted = 1 WHERE id = ?").run(id);

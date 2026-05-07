@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-// Importera db-objektet - vi behöver detta för att kommunicera med databasen
 const db = require('../data/db');
 
 router.get('/', (req, res) => {
@@ -66,7 +64,6 @@ router.post('/remove/:id', (req, res) => {
     const idToRemove = req.params.id;
     
     if (req.session.basket) {
-        // Filtrera bort alla produkter som har detta ID
         req.session.basket = req.session.basket.filter(id => id.toString() !== idToRemove.toString());
     }
     
@@ -74,14 +71,13 @@ router.post('/remove/:id', (req, res) => {
 });
 
 router.post('/update-qty', (req, res) => {
-    const { id, qty } = req.body; // Hämtar id och nya antalet från scriptet
+    const { id, qty } = req.body; 
     const newQty = parseInt(qty);
 
     if (req.session.basket) {
-        // 1. Ta bort alla gamla förekomster av just denna produkt
         req.session.basket = req.session.basket.filter(productId => productId.toString() !== id.toString());
 
-        // 2. Lägg till produkten igen exakt så många gånger som användaren valt
+        // Lägg till produkten igen exakt så många gånger som användaren valt
         for (let i = 0; i < newQty; i++) {
             req.session.basket.push(id.toString());
         }

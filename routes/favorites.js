@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-// Importera db-objektet - vi behöver detta för att kommunicera med databasen
 const db = require('../data/db');
 
 router.get('/', function(req, res) {
@@ -15,14 +13,12 @@ router.get('/', function(req, res) {
     });
   }
 
-  // Hämta favoriterna från databasen istället för den gamla filen
   const placeholders = userFavorites.map(() => '?').join(',');
   const favoriteProducts = db.prepare(`
     SELECT * FROM products 
     WHERE id IN (${placeholders}) AND isDeleted != 1
   `).all(...userFavorites);
 
-  // Vi lägger på isFavorite: true så att EJS vet att hjärtat ska vara rött
   const productsWithStatus = favoriteProducts.map(product => ({
     ...product,
     isFavorite: true

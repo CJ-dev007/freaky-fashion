@@ -1,8 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-
-// Importera db-objektet - vi behöver detta för att kommunicera med databasen
 const db = require('../data/db');
 
  const spots = [
@@ -11,7 +8,6 @@ const db = require('../data/db');
         { id: 3, name: "Mest Populära Just Nu", image: "images/spots4.avif", url: "/spots/popular" }
     ];
 
-// 1. Detaljerna
 router.get('/spots/details', (req, res) => {
     res.send(`
         <div style="text-align: center; font-family: 'Comic Sans MS', sans-serif; padding: 50px; background-color: #f9f9f9;">
@@ -24,7 +20,6 @@ router.get('/spots/details', (req, res) => {
     `);
 });
 
-// 2. Flip-flops
 router.get('/spots/flipflops', (req, res) => {
     res.send(`
         <div style="text-align: center; font-family: sans-serif; padding: 50px; background-color: #fff4e6;">
@@ -37,7 +32,6 @@ router.get('/spots/flipflops', (req, res) => {
     `);
 });
 
-// 3. Populärt just nu
 router.get('/spots/popular', (req, res) => {
     res.send(`
         <div style="text-align: center; font-family: sans-serif; padding: 50px; background-color: #e3f2fd;">
@@ -78,8 +72,6 @@ router.get('/funny/shoes', (req, res) => {
 });
 
   
-
-// GET http://localhost:3000/
 router.get('/', function(req, res, next) {
 
     req.session.user = { admin: 1, name: 'Admin Test' };
@@ -104,7 +96,6 @@ router.get('/', function(req, res, next) {
     products: productsWithFavorites
   });
 });
-
 
 
 router.get('/checkout', (req, res) => {

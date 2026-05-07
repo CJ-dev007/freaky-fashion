@@ -4,13 +4,13 @@ const db = require('../data/db');
 
 router.get('/klader', (req, res) => {
     try {
-        // 1. Hämta kategorins namn (förutsatt att 'Kläder' har id 1)
+        // Hämta kategorins namn 
         const category = db.prepare("SELECT name FROM categories WHERE id = ?").get(1);
 
-        // 2. Hämta bara Hoodies som tillhör kategori 1 och INTE är raderade
+        // Hämta bara Hoodies som tillhör kategori 1 och INTE är raderade
         const categoryProducts = db.prepare("SELECT * FROM products WHERE categoryId = 1 AND name LIKE '%Hoodie%' AND isDeleted = 0").all();
 
-        // 3. Rendera sidan
+        // Rendera sidan
         res.render('categories', {
             title: category ? category.name : 'Kläder',
             products: categoryProducts
@@ -28,18 +28,18 @@ const surpriseGifs = [
     "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2RvNHZkdzN4M2V3OGQ5ZTZkd3ozaGo3ZTU0Z2V0aXFoOTFwcXAyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i34oXbluCO0G4/giphy.gif"
 ];
 
-// Denna rutt fångar upp alla nya kategorier (t.ex. /categories/5)
+// Denna rutt fångar upp alla nya kategorier 
 router.get('/:id', (req, res) => {
     const categoryId = req.params.id;
     
-    // 1. Kolla vad kategorin heter i databasen
+    // Kolla vad kategorin heter i databasen
     const category = db.prepare("SELECT name FROM categories WHERE id = ?").get(categoryId);
     const catName = category ? category.name : "Okänd trend";
 
-    // 2. Slumpa en bild
+    // Slumpa en bild
     const randomGif = surpriseGifs[Math.floor(Math.random() * surpriseGifs.length)];
 
-    // 3. Skicka ut den roliga sidan direkt
+    // Skicka ut den roliga sidan direkt
     res.send(`
         <div style="text-align: center; font-family: 'Trebuchet MS', sans-serif; padding: 50px; background-color: #ffe066; min-height: 100vh;">
             <h1 style="font-size: 3rem; text-shadow: 2px 2px #fff;">🌟 TREND-CHOCK: ${catName.toUpperCase()} 🌟</h1>

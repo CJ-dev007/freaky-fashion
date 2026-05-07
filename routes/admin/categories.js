@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// LISTA (Hämta från riktiga databasen istället för fakeCategories)
 router.get('/', (req, res) => {
     const allCategories = db.prepare("SELECT * FROM categories").all();
     res.render('admin/categories', { 
@@ -57,12 +56,10 @@ router.post('/new', upload.single('image'), (req, res) => {
 router.post('/delete/:id', (req, res) => {
     try {
         const id = req.params.id;
-        
-        // Kör SQL för att ta bort kategorin med rätt ID
+   
         const sql = "DELETE FROM categories WHERE id = ?";
         db.prepare(sql).run(id);
 
-        // Skicka tillbaka användaren till listan så de ser att den är borta
         res.redirect('/admin/categories');
     } catch (err) {
         console.error("Fel vid radering:", err);

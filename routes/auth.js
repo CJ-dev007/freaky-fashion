@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
-// Importera db-objektet - vi behöver detta för att kommunicera med databasen
 const db = require('../data/db');
 
 router.get('/login', function(req, res,) {
