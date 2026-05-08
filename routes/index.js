@@ -110,6 +110,25 @@ router.get('/checkout', (req, res) => {
     `);        
 })
 
+router.get('/login', (req, res) => {
+    res.render('login', { 
+        title: 'Logga in',
+        errorMessage: null 
+    });
+});
+
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    if (username === 'admin' && password === '1234') {
+        res.redirect('/dashboard');
+    } else {
+        res.render('login', { 
+            errorMessage: 'Fel användarnamn eller lösenord. Försök igen!' 
+        });
+    }
+});
+
 
 module.exports = router;
 

@@ -22,15 +22,17 @@
 
 .form-group input {
     width: 100%;
-    padding: 5px;
-    border: 1px solid #000; 
+    padding: 10px;
+    border: 1px solid #ccc; 
     box-sizing: border-box;
+    border-radius: 4px;
 }
 
 .register-btn {
+    width: 100%;
     background: #dee7de;
     border: 1px solid #000000;
-    padding: 6px 25px;
+    padding: 12px;
     border-radius: 4px; 
     cursor: pointer;
     margin-top: 10px;

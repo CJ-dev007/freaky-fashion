@@ -9,4 +9,13 @@ CREATE TABLE products (
   isPopular INTEGER DEFAULT 0
 );
 
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL, 
+  email TEXT,
+  admin INTEGER DEFAULT 0
+);
 
+INSERT INTO users (username, password, email, admin) 
+VALUES ('admin', '1234', 'admin@freakyfashion.se', 1);

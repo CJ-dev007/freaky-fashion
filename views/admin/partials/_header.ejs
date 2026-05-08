@@ -20,6 +20,17 @@
                 <li class="<%= activePage === 'categories' ? 'selected' : '' %>">
                     <a href="/admin/categories">Kategorier</a></li>
             </ul>
+
+            <% if (locals.isLoggedIn) { %>
+                <div class="user-box">
+                    <span class="user-status">Inloggad som: <strong><%= user.username %></strong></span>
+                    <a href="/logout" class="logout-link">Logga ut</a>
+                </div>
+            <% } else { %>
+                <div class="user-box">
+                    <a href="/login">Logga in</a>
+                </div>
+            <% } %>
          </nav>
 
      

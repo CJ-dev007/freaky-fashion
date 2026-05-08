@@ -1,11 +1,10 @@
 /* --- LAYOUT FÖR ADMIN-PANELEN --- */
 
 .container {
-    display: flex; /* Lägger sidebar och main bredvid varandra */
+    display: flex; 
     min-height: 100vh;
 }
 
-/* Sidebar-menyn till vänster */
 .sidebar {
     width: 200px;
     background-color: #bae0f7;
@@ -36,15 +35,41 @@
     color: black;
 }
 
+.user-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    text-align: center;
+    margin-top: 50px;       
+    padding: 20px 10px;     
+   
+}
+
+.user-status {
+    font-size: 0.85rem;
+    margin-bottom: 15px;    
+    display: block;
+}
+
+.logout-link {
+    color: #ff6b6b;         /* En rödaktig färg som syns bra mot mörkt */
+    font-style: italic;     /* Kursiv stil */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
+
 .panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 800px;
-    width: 100%; /* Viktigt så den tar upp hela bredden */
+    width: 100%; 
 }
 
-/* Top bar rubriken */
 .top-bar {
     background-color: #333;
     color: white;
@@ -54,7 +79,7 @@
 .top-bar h1 {
     margin: 0;
     font-size: 1.5rem;
-    text-align: left; /* Admin brukar vara vänsterställt */
+    text-align: left;
 }
 
 /* --- TABELLEN --- */
@@ -116,8 +141,6 @@
 .table-row div:last-child {
     border-right: none;
 }
-
-/* --- KNAPPAR & IKONER --- */
 
 .btn-add {
     display: inline-flex;

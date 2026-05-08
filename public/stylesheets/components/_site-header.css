@@ -74,7 +74,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 80px 20px; /* Ger luft så det ser ut som på bilden */
+    padding: 80px 20px; 
 }
 
 .no-results-container p {
@@ -87,6 +87,30 @@
 
 .no-results-container h1 {
   margin-top: 0;
+}
+
+/* När man är inloggad får välkomsttexten en grönaktig ton */
+.user-status strong {
+    color: #28a745; /* En snygg grön färg */
+    text-transform: capitalize;
+}
+
+/* Gör inloggnings-indikatorn lite mer framträdande */
+.user-box {
+    background-color: rgba(40, 167, 69, 0.05); /* Väldigt svag grön bakgrund */
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    text-align: center;
 }
 
 @media (min-width: 480px)  {

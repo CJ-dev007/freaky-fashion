@@ -22,7 +22,6 @@ const adminRouter = require('./routes/admin/admin');
 
 const app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -39,6 +38,13 @@ app.use(session({
   cookie: { secure: false } // Sätt till false eftersom du kör lokalt (inte https)
 }));
 
+const isAdmin = (req, res, next) => {
+        if (req.session.isLoggedIn && req.session.user && req.session.user.admin === 1) {
+        return next(); 
+    }
+      res.redirect('/login'); 
+};
+
 // Middleware som hämtar kategorier till menyn på VARJE sida
 app.use((req, res, next) => {
     try {
@@ -52,14 +58,26 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/admin/products', adminProductsRouter);
-app.use('/admin/categories', adminCategoriesRouter);
-app.use('/admin', adminRouter);
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+    res.locals.user = req.session.user || null;
+    if (req.session.showWelcome) {
+        res.locals.welcomeMessage = `Välkommen tillbaka, ${req.session.user.username}!`;
+        delete req.session.showWelcome; 
+    } else {
+        res.locals.welcomeMessage = null;
+    }
+    next();
+});
 
+app.use('/admin/products', isAdmin, adminProductsRouter);
+app.use('/admin/categories', isAdmin, adminCategoriesRouter);
+app.use('/admin', isAdmin, adminRouter);
+
+app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/products', productsRouter);
 app.use('/basket', basketRouter);
-app.use('/', authRouter);
 app.use('/search', searchRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/categories', categoriesRouter);

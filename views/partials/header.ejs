@@ -1,3 +1,9 @@
+<% if (locals.welcomeMessage) { %>
+    <div class="alert-success">
+        <%= welcomeMessage %>
+    </div>
+<% } %>
+
 <header class="site-header">
   <div> <!-- Logo -->
     <a href="/">
@@ -13,7 +19,12 @@
     <ul class="icons">
       <li><a href="/favorites" aria-label="Favoriter"><i class="bi bi-heart-fill"></i></a></li>
       <li><a href="/basket" aria-label="Varukorg"><i class="bi bi-basket2-fill"></i></a></li>
-      <li><a href="/register" aria-label="Login"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
+
+      <% if (locals.isLoggedIn) { %>
+        <li><a href="/logout" title="Logga ut"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+      <% } else { %>
+        <li><a href="/login" title="Logga in"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+      <% } %>
     </ul>
   </div>
 
