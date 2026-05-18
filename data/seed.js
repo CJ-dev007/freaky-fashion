@@ -1,7 +1,7 @@
 const db = require('./db');
 const products = require('./products');
 
-// 1. Skapa tabellen om den inte redan finns
+// Skapa tabellen om den inte redan finns
 db.exec(`
   CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,13 +15,13 @@ db.exec(`
   );
 `);
 
-// 2. Förbered för att lägga in data
+// Förbered för att lägga in data
 const insert = db.prepare(`
     INSERT INTO products (name, slug, price, brand, image, isNew, isPopular) 
     VALUES (@name, @slug, @price, @brand, @image, @isNew, @isPopular)
 `);
 
-// 3. Kör loopen
+// Kör loopen
 for (const p of products) {
     insert.run({
         name: p.name,

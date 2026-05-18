@@ -44,7 +44,7 @@ router.get('/spots/popular', (req, res) => {
     `);
 });
 
-// Accessoarer - Humor-sida
+// Accessoarer - Humorsida
 router.get('/funny/accessories', (req, res) => {
     res.send(`
         <div style="text-align: center; font-family: 'Courier New', monospace; padding: 50px; background-color: #f0f0f0;">
@@ -58,7 +58,7 @@ router.get('/funny/accessories', (req, res) => {
     `);
 });
 
-// Skor - Humor-sida
+// Skor - Humorsida
 router.get('/funny/shoes', (req, res) => {
     res.send(`
         <div style="text-align: center; font-family: 'Comic Sans MS', sans-serif; padding: 50px; background-color: rgb(250, 242, 169);">
@@ -120,11 +120,66 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    if (username === 'admin' && password === '1234') {
-        res.redirect('/dashboard');
-    } else {
+    try {
+        const user = db.prepare("SELECT * FROM users WHERE username = ? AND password = ?").get(username, password);
+
+        if (user) {
+            req.session.user = { id: user.id, name: user.username };
+            
+            res.redirect('/'); 
+
+        } else {
+            res.render('login', { 
+                title: 'Logga in',
+                errorMessage: 'Fel användarnamn eller lösenord. Försök igen!' 
+            });
+        }
+
+    } catch (error) {
+        console.error("Fel vid inloggning:", error);
         res.render('login', { 
-            errorMessage: 'Fel användarnamn eller lösenord. Försök igen!' 
+            title: 'Logga in',
+            errorMessage: 'Något gick fel vid inloggningen. Försök igen.' 
+        });
+    }
+});
+
+router.get ('/register', (req, res) => {
+    res.render('register', {
+        title: 'Skapa konto',
+        errorMessage: null
+    });
+});
+
+router.post('/register', (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        if (!username || !password) {
+            return res.render('register', {
+                title: 'Skapa konto',
+                errorMessage: 'Alla fält måste fyllas i'
+            });
+        }
+    
+    const userExists = db.prepare("SELECT * FROM users WHERE username = ?").get(username);
+    if (userExists) {
+        return res.render('register', {
+            title: 'Skapa konto',
+            errorMessage: 'Användarnamnet är redan upptaget.'
+        });
+    }
+
+    const insertUser = db.prepare("INSERT INTO users (usernamne, password) VALUES (?, ?");
+    insertUser.run(username,password);
+
+    res.redirect('/login');
+
+    } catch (error) {
+        console.error("Fel vid registrering:", error);
+        res.render('register', { 
+            title: 'Skapa konto', 
+            errorMessage: 'Något gick fel i databasen. Försök igen.' 
         });
     }
 });
