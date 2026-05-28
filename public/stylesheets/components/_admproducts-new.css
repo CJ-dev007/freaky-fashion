@@ -4,7 +4,7 @@
 
 .form-group {
     margin-bottom: 20px;
-    max-width: 500px; /* Så formuläret inte blir jättebrett */
+    max-width: 500px; 
 }
 
 .form-group label {
@@ -35,14 +35,13 @@
 }
 
 .btn-add:hover {
-    background-color: #b3cbb3; /* Lite mörkare vid hover */
+    background-color: #b3cbb3; 
 }
 
 #image-upload {
     display: none;
 }
 
-/* 2. Styla din nya "Välj bild"-knapp */
 .custom-file-upload {
     display: inline-block;
     padding: 7px 0;
@@ -58,7 +57,6 @@
     font-family: inherit; 
 }
 
-/* 3. Lite effekt när man håller musen över */
 .custom-file-upload:hover {
     background-color: #e6c2fa;
 }

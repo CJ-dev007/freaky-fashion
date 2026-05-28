@@ -30,12 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/icons', express.static(path.join(__dirname, 'node_modules/bootstrap-icons/font')));
+
 
 app.use(session({
   secret: 'hemligt-valfritt-ord',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Sätt till false eftersom du kör lokalt (inte https)
+  cookie: { secure: false } // Satt till false eftersom jag kör lokalt (inte https)
 }));
 
 const isAdmin = (req, res, next) => {

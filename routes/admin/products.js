@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../data/db');
-const { isAdmin } = require('../../middleware/auth');
+// const { isAdmin } = require('../../middleware/auth');
+// Behövs inte här, app.js skyddar hela /admin/categories globalt
 
 const multer = require('multer');
 const path = require('path'); 
@@ -18,7 +19,7 @@ const storage = multer.diskStorage({
     }
 });
 
-// Skapa upload-objektet med den nya konfigurationen
+// Skapa upload-objektet
 const upload = multer({ storage: storage });
 
 router.get('/', (req, res) => {

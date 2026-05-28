@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../data/db');
-const { isAdmin } = require('../../middleware/auth');
+// const { isAdmin } = require('../../middleware/auth');
+// Behövs inte här, app.js skyddar hela /admin/categories globalt
 
 const multer = require('multer');
 const path = require('path');
 
-// 1. Inställningar för Multer (sparar i mappen categories)
+// Inställningar för Multer (sparar i mappen categories)
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/images/categories/');

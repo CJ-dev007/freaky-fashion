@@ -26,7 +26,7 @@
             <button class="nav-button prev" id="prevButton" aria-label="Bakåt">❮</button>
             
             <div class="product-scroll" id="productScroll">
-                <%# Här loopar vi igenom 'relatedProducts' som du skickar från din route %>
+                <%# Här loopar vi igenom 'relatedProducts' som skickas från routen %>
                 <% relatedProducts.forEach(item => { %>
                     <article class="product-card">
                         <a href="/products/<%= item.slug %>">

@@ -4,31 +4,8 @@
 <main class="container">
     <h1 class="category-title"><%= title %></h1> 
         
-    <section class="product-grid">
-        <h2>Kläder</h2>
-            <div class="items">
-                <% products.forEach(product => { %>
-                    <div class="product-card">
-                        <a href="/products/<%= product.slug %>">
-                            <div class="image-container">
-                                
-                            <img src="/<%= product.image %>" alt="<%= product.name %>">
-                      
-                        <button class="favorite-btn" data-id="<%= product.id %>">
-                            <i class="bi <%= product.isFavorite ? 'bi-heart-fill' : 'bi-heart' %>"></i>
-                        </button>
-                    </div>
-                    
-                            <div class="product-details-toprow">
-                                <div class="name"><%= product.name %></div>
-                                <div class="price"><%= product.price %> SEK</div>
-                            </div>
-                            <div class="brand"><%= product.brand %></div>
-                        </a>
-                    </div>
-                <% }) %>
-            </div>
-        </section>
+<%- include('partials/_productGrid', { products: products, hideBadge: true }) %>
+
 </main>
 
 <%- include('partials/_features.ejs') %>

@@ -52,8 +52,8 @@
 }
 
 .logout-link {
-    color: #ff6b6b;         /* En rödaktig färg som syns bra mot mörkt */
-    font-style: italic;     /* Kursiv stil */
+    color: #ff6b6b;        
+    font-style: italic;     
     text-decoration: none;
     font-weight: bold;
 }

@@ -3,26 +3,23 @@
     border-right: none;
 }
 
-/* Ändra kolumnbredderna enbart på kategorisidan */
 .category-page .category-grid {
     display: grid;
-    /* 1fr betyder "ta allt utrymme", 40px räcker för tunnan */
     grid-template-columns: 1fr 40px; 
     align-items: center;
 }
 
-/* Flytta själva ikonen/knappen till höger i sin lilla ruta */
+/* Flytta själva ikonen till höger i sin lilla ruta */
 .category-page .action-icons {
     justify-content: flex-end; 
-    padding-right: 20px;       /* Detta skapar det "lilla mellanrummet" till kanten */
+    padding-right: 20px;   
 }
 
 
-/* Ta bort ramen/rutan runt soptunnan */
+/* Ta bort rutan runt soptunnan */
 .category-page .action-icons,
 .category-page .btn-icon {
     background: transparent;
     border: none;
-    box-shadow: none;
-    
+    box-shadow: none;  
 }

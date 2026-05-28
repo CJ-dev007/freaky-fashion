@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../data/db');
 
-router.get('/login', function(req, res,) {
+router.get('/login', function(req, res) {
   res.render('login', { title: 'Logga in', errorMessage: null });
 });
 
@@ -31,6 +31,12 @@ router.post('/login', (req, res) => {
     }
 });
 
+router.get('/register', (req, res) => {
+    res.render('register', {
+        title: 'Skapa konto',
+        errorMessage: null
+    });
+});
 
 router.post('/register', (req, res) => {
     const { email, password } = req.body;

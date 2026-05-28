@@ -91,13 +91,13 @@
 
 /* När man är inloggad får välkomsttexten en grönaktig ton */
 .user-status strong {
-    color: #28a745; /* En snygg grön färg */
+    color: #28a745; 
     text-transform: capitalize;
 }
 
 /* Gör inloggnings-indikatorn lite mer framträdande */
 .user-box {
-    background-color: rgba(40, 167, 69, 0.05); /* Väldigt svag grön bakgrund */
+    background-color: rgba(40, 167, 69, 0.05); 
     border-radius: 8px;
     padding: 15px;
     border: 1px solid rgba(40, 167, 69, 0.2);

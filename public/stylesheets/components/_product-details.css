@@ -67,7 +67,7 @@
 }
 
 .add-to-basket:hover {
-    background-color: #b3cbb3; /* Lite mörkare vid hover */
+    background-color: #b3cbb3; 
 }
 
 @media (min-width: 480px) {

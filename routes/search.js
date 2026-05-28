@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../data/db');
 
 router.get('/', (req, res) => {
-    const searchTerm = req.query.q || ''; // Hämtar det användaren skrev i sökfältet
+    const searchTerm = req.query.q || ''; 
 
     // Sök i databasen efter produkter som matchar namnet
     // Vi använder % för att hitta ordet även om det bara är en del av namnet

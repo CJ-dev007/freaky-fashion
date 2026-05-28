@@ -127,7 +127,7 @@ h1  {
 }    
 
 .buy-button:hover {
-    background-color: #b3cbb3; /* Lite mörkare vid hover */
+    background-color: #b3cbb3; 
 }
 
 .checkout-container h1 {
@@ -189,7 +189,7 @@ h1  {
     font-weight: bold;
     font-size: 0.90rem;
     height: 20px;
-    display: grid !important; /* Tvingar fram grid även om mobilstil döljer den */
+    display: grid !important; 
   }
 
   /* Zebra-randning för varannan rad efter headern */
@@ -199,18 +199,17 @@ h1  {
 
   .item-info {
     display: flex;
-    flex-direction: column; /* Staplar innehåll om det finns flera saker */
-    justify-content: center; /* Centrerar texten vertikalt i rutan */
+    flex-direction: column; 
+    justify-content: center; 
     height: 100%;
   }
 
   .product-name {
     display: block;
-    line-height: 1; /* Fixar så texten inte "svävar" */
+    line-height: 1; 
     text-align: left;
     width: 100%;
   }
-
 
   /* Mobil-prefix döljs på desktop */
   .item-info::before {
@@ -250,7 +249,7 @@ h1  {
   padding: 0;
   display: flex;
   align-items: center;
-  font-size: 1.2em; /* Relativ storlek baserat på texten runt om */
+  font-size: 1.2em; 
   color: #333;
   transition: color 0.2s;
 }
