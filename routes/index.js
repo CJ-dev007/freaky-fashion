@@ -74,8 +74,6 @@ router.get('/funny/shoes', (req, res) => {
   
 router.get('/', function(req, res, next) {
 
-    req.session.user = { admin: 1, name: 'Admin Test' };
-
   const userFavorites = req.session.favorites || [];
 
   const onlyPopularFromDb = db.prepare("SELECT * FROM products WHERE isPopular =1 AND isDeleted = 0").all();
