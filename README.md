@@ -53,20 +53,22 @@ Följ dessa steg för att köra projektet lokalt på din dator:
 
 1. **Klona repot:**
    ```bash
-   git clone https://github.com
+   git clone https://github.com/CJ-dev007/freaky-fashion
    ```
 2. **Navigera till projektmappen:**
    ```bash
    cd freakyfashion
    ```
-3. **Installera beroenden (om du använder Node/npm, annars stryk detta steg):**
+3. **Installera beroenden:**
    ```bash
    npm install
    ```
 4. **Starta applikationen:**
    ```bash
-   npm run
+   npm start
    ```
+När servern har startat hittar du sidan live i din webbläsare på:  
+**`http://localhost:3000`**
    
 ## Vad jag lärde mig
 
